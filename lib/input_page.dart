@@ -60,10 +60,28 @@ class InputPage extends StatelessWidget {
                   style: ButtonStyle(
                       side: MaterialStateProperty.all(
                           BorderSide(color: Colors.pink))),
-                  onPressed: ()async {
-              Profile profile=    await  fetchProfile(username);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                  onPressed: () async {
+                    bool abc;
+                    print(username);
+                    try {
+                      Profile profile = await fetchProfile(username);
+               //       print(profile.fullname);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage(
+                                    profile: profile,
+                                    isthere: true,
+                                  )));
+                    } catch (e) {
+                      abc = false;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage(
+                                    isthere: false,
+                                  )));
+                    }
                   },
                   child: Text(
                     "Show",

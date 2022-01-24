@@ -6,8 +6,8 @@ import 'package:expandable/expandable.dart';
 
 class ProfilePage extends StatelessWidget {
   Profile? profile;
-  bool ?isthere;
-  ProfilePage({this.profile,this.isthere});
+  bool? isthere;
+  ProfilePage({this.profile, this.isthere});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,229 +37,238 @@ class ProfilePage extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         backgroundColor: Colors.white,
         title: Text(
-          "name",
+          (isthere!) ? profile!.fullname! : 'not found',
           style: crewTextStyle.copyWith(fontSize: 30),
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 15, bottom: 5),
-              child: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  radius: 125,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(125),
-                    child: Image.network(
-                      'https://crewbella.s3.ap-south-1.amazonaws.com/img/profiles/image/2_082f840a25435f461c0cd48ba63f410a8954077c4fc7bbd9a51448.jpg',
-                      height: 243,
-                      width: 243,
-                      fit: BoxFit.fitWidth,
+        child: (isthere!)
+            ? ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15, bottom: 5),
+                    child: CircleAvatar(
+                        backgroundColor: Colors.red,
+                        radius: 125,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(125),
+                          child: Image.network(
+                            profile!.imageHD!,
+                            height: 243,
+                            width: 243,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        )),
+                  ),
+                  Center(
+                    child: Text(
+                      profile!.fullname!,
+                      style: crewTextStyle.copyWith(
+                          fontSize: 28, fontWeight: FontWeight.bold),
                     ),
-                  )),
-            ),
-            Center(
-              child: Text(
-                'Chirag Balani',
-                style: crewTextStyle.copyWith(
-                    fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '@chiragbalani',
-                    style: crewTextStyle.copyWith(fontSize: 20),
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.location_on_outlined),
-                      Text(
-                        'Jaipur',
-                        style: crewTextStyle.copyWith(fontSize: 20),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: 23),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        '9 ',
-                        style: crewTextStyle.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'followers',
-                        style: crewTextStyle.copyWith(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '9 ',
-                        style: crewTextStyle.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'quickbooks',
-                        style: crewTextStyle.copyWith(fontSize: 20),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
-              child: TextButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30))),
-                    backgroundColor: MaterialStateProperty.all(Colors.red)),
-                onPressed: () {},
-                child: Text('See Quickbook',
-                    style: crewTextStyle.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 8),
-              child: ExpandablePanel(
-                theme: ExpandableThemeData(
-                    hasIcon: false,
-                    useInkWell: true,
-                    inkWellBorderRadius: BorderRadius.circular(10)),
-                header: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 50),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      border: Border.all(color: Colors.grey.shade300)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Know more',
-                        style: crewTextStyle.copyWith(color: Colors.grey),
-                      ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.grey,
-                      )
-                    ],
-                  ),
-                ),
-                collapsed: SizedBox(
-                  height: 0,
-                ),
-                expanded: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          profile!.username!,
+                          style: crewTextStyle.copyWith(fontSize: 20),
+                        ),
+                        Row(
                           children: [
-                            Icon(Icons.calendar_today),
+                            Icon(Icons.location_on_outlined),
                             Text(
-                              "  Joined:   ",
-                              style: crewTextStyle,
+                              profile!.location!,
+                              style: crewTextStyle.copyWith(fontSize: 20),
                             ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 23),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
                             Text(
-                              '76699',
+                              '${profile!.followings!} ',
                               style: crewTextStyle.copyWith(
                                   fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'followers',
+                              style: crewTextStyle.copyWith(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              '${profile!.quick_bookings!} ',
+                              style: crewTextStyle.copyWith(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'quickbooks',
+                              style: crewTextStyle.copyWith(fontSize: 20),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+                    child: TextButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red)),
+                      onPressed: () {},
+                      child: Text('See Quickbook',
+                          style: crewTextStyle.copyWith(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 50, vertical: 8),
+                    child: ExpandablePanel(
+                      theme: ExpandableThemeData(
+                          hasIcon: false,
+                          useInkWell: true,
+                          inkWellBorderRadius: BorderRadius.circular(10)),
+                      header: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 50),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            border: Border.all(color: Colors.grey.shade300)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Know more',
+                              style: crewTextStyle.copyWith(color: Colors.grey),
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.grey,
                             )
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
+                      collapsed: SizedBox(
+                        height: 0,
+                      ),
+                      expanded: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Column(
                           children: [
-                            Icon(Icons.cake_outlined),
-                            Text(
-                              "  Date of Birth:   ",
-                              style: crewTextStyle,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.calendar_today),
+                                  Text(
+                                    "  Joined:   ",
+                                    style: crewTextStyle,
+                                  ),
+                                  Text(
+                                    profile!.created_at!.substring(0, 16),
+                                    style: crewTextStyle.copyWith(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
                             ),
-                            Text(
-                              '76699',
-                              style: crewTextStyle.copyWith(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.cake_outlined),
+                                  Text(
+                                    "  Date of Birth:   ",
+                                    style: crewTextStyle,
+                                  ),
+                                  Text(
+                                    (profile!.dob!=null)?profile!.dob!:'unknown',
+                                    style: crewTextStyle.copyWith(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),
-                      )
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          Image.asset(
+                            'images/follow.png',
+                          ),
+                          Text(
+                            "Follow",
+                            style: crewTextStyle.copyWith(
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Image.asset(
+                            'images/dm.png',
+                          ),
+                          Text(
+                            "Ping",
+                            style: crewTextStyle.copyWith(
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Image.asset(
-                      'images/follow.png',
+                  Divider(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.work_outline,
+                          color: Colors.red.shade800,
+                        ),
+                        Text(
+                          'Client Postings',
+                          style: crewTextStyle.copyWith(
+                              color: Colors.red.shade800,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "Follow",
-                      style:
-                          crewTextStyle.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.asset(
-                      'images/dm.png',
-                    ),
-                    Text(
-                      "Ping",
-                      style:
-                          crewTextStyle.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.work_outline,
-                    color: Colors.red.shade800,
                   ),
-                  Text(
-                    'Client Postings',
-                    style: crewTextStyle.copyWith(
-                        color: Colors.red.shade800,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  ClientCard()
                 ],
-              ),
-            ),
-            ClientCard()
-          ],
-        ),
+              )
+            : Center(child: Text('Username not found /error')),
       ),
     );
   }
