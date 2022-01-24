@@ -1,10 +1,13 @@
 import 'package:crewbella/constant.dart';
+import 'package:crewbella/profile_model.dart';
+import 'package:crewbella/widget/client_card.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
-
+class ProfilePage extends StatelessWidget {
+  Profile? profile;
+  bool ?isthere;
+  ProfilePage({this.profile,this.isthere});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -206,19 +209,55 @@ class Profile extends StatelessWidget {
                 ),
               ),
             ),
-            Row(children: [
-              Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Image.asset(
+                      'images/follow.png',
+                    ),
+                    Text(
+                      "Follow",
+                      style:
+                          crewTextStyle.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      'images/dm.png',
+                    ),
+                    Text(
+                      "Ping",
+                      style:
+                          crewTextStyle.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'images/ping.png',
+                  Icon(
+                    Icons.work_outline,
+                    color: Colors.red.shade800,
                   ),
                   Text(
-                    "PINGS",
-                    style: crewTextStyle.copyWith(fontSize: 10),
+                    'Client Postings',
+                    style: crewTextStyle.copyWith(
+                        color: Colors.red.shade800,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-            ],)
+            ),
+            ClientCard()
           ],
         ),
       ),

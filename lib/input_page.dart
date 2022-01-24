@@ -1,4 +1,6 @@
+import 'package:crewbella/profile_model.dart';
 import 'package:crewbella/profile_page.dart';
+import 'package:crewbella/services.dart';
 import 'package:flutter/material.dart';
 import 'constant.dart';
 
@@ -7,6 +9,7 @@ class InputPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? username;
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -42,6 +45,9 @@ class InputPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
               child: TextFormField(
+                onChanged: (value) {
+                  username = value;
+                },
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.pink),
@@ -54,9 +60,10 @@ class InputPage extends StatelessWidget {
                   style: ButtonStyle(
                       side: MaterialStateProperty.all(
                           BorderSide(color: Colors.pink))),
-                  onPressed: () {
+                  onPressed: ()async {
+              Profile profile=    await  fetchProfile(username);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
+                        MaterialPageRoute(builder: (context) => ProfilePage()));
                   },
                   child: Text(
                     "Show",
