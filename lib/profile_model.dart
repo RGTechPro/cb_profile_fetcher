@@ -30,7 +30,7 @@ class Profile {
         quick_bookings: json['basic']['quick_bookings'].toString(),
         dob: json['basic']['dob'],
         created_at: json['basic']['created_at'],
-       // client_posting: json['client_postings'],
+        client_posting: json['client_postings'],
         location: json['locations'][0]['city']);
   }
 }

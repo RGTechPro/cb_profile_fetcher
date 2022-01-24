@@ -204,7 +204,9 @@ class ProfilePage extends StatelessWidget {
                                     style: crewTextStyle,
                                   ),
                                   Text(
-                                    (profile!.dob!=null)?profile!.dob!:'unknown',
+                                    (profile!.dob != null)
+                                        ? profile!.dob!
+                                        : 'unknown',
                                     style: crewTextStyle.copyWith(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -265,7 +267,25 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ClientCard()
+                  // ClientCard(),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      // scrollDirection: Axis.vertical,
+                      itemCount: profile!.client_posting!.length,
+                      itemBuilder: (context, i) {
+                        return ClientCard(
+                          fullname: profile!.fullname,
+                          username: profile!.username,
+                          image: profile!.image,
+                          location: profile!.client_posting![i]['location'],
+                          profession: profile!.client_posting![i]['profession'],
+                          experience: profile!.client_posting![i]['experience']
+                              .toString(),
+                          skills: profile!.client_posting![i]['skills'],
+                          isOpen: profile!.client_posting![i]['is_active'],
+                        );
+                      })
                 ],
               )
             : Center(child: Text('Username not found /error')),

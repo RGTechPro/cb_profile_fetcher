@@ -2,8 +2,23 @@ import 'package:crewbella/constant.dart';
 import 'package:flutter/material.dart';
 
 class ClientCard extends StatelessWidget {
-  const ClientCard({Key? key}) : super(key: key);
-
+  String? fullname;
+  String? username;
+  String? profession;
+  String? skills;
+  String? location;
+  String? experience;
+  bool? isOpen;
+  String? image;
+  ClientCard(
+      {this.fullname,
+      this.experience,
+      this.image,
+      this.isOpen,
+      this.location,
+      this.profession,
+      this.skills,
+      this.username});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +47,7 @@ class ClientCard extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30),
                           child: Image.network(
-                            'https://crewbella.s3.ap-south-1.amazonaws.com/img/profiles/image/2_082f840a25435f461c0cd48ba63f410a8954077c4fc7bbd9a51448.jpg',
+                            image!,
                             height: 60,
                             width: 60,
                             fit: BoxFit.fitWidth,
@@ -47,12 +62,12 @@ class ClientCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Chirag Balani',
+                            fullname!,
                             style: crewTextStyle.copyWith(
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '@chiragbalani',
+                            username!,
                             style: crewTextStyle.copyWith(fontSize: 15),
                           )
                         ],
@@ -83,13 +98,13 @@ class ClientCard extends StatelessWidget {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: (isOpen!) ? Colors.green : Colors.red,
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          'CLOSED',
+                          (isOpen!) ? 'OPEN' : 'CLOSED',
                           style: TextStyle(
                               fontSize: 25,
                               color: Colors.white,
@@ -116,7 +131,7 @@ class ClientCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '@chiragbalani',
+                            profession!,
                             style: crewTextStyle.copyWith(fontSize: 15),
                           )
                         ],
@@ -133,7 +148,7 @@ class ClientCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '@chiragbalani',
+                            location!,
                             style: crewTextStyle.copyWith(fontSize: 15),
                           )
                         ],
@@ -158,28 +173,30 @@ class ClientCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '@chiragbalani',
+                            experience!,
                             style: crewTextStyle.copyWith(fontSize: 15),
                           )
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Skills',
-                            style: crewTextStyle.copyWith(
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '@chiragbal',
-                            overflow: TextOverflow.clip,
-                            style: crewTextStyle.copyWith(fontSize: 15),
-                          )
-                        ],
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Skills',
+                              style: crewTextStyle.copyWith(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              (skills != null) ? skills! : 'No skill',
+                              overflow: TextOverflow.clip,
+                              style: crewTextStyle.copyWith(fontSize: 15),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
